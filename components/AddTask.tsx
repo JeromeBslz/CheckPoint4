@@ -1,6 +1,5 @@
 import { Flex, Input, Button } from "@chakra-ui/react";
 import { SmallAddIcon } from "@chakra-ui/icons";
-
 import { AddTaskProps } from "@types";
 
 const AddTask = ({ task, setTask, handleCreateTask }: AddTaskProps) => {
@@ -11,12 +10,12 @@ const AddTask = ({ task, setTask, handleCreateTask }: AddTaskProps) => {
         size="lg"
         onChange={(e) => setTask(e.target.value)}
         value={task}
-        style={{ 'background': "#fff" }}
+        style={{ background: "#fff" }}
       />
       <Button
         colorScheme="twitter"
         size="lg"
-        onClick={() => handleCreateTask()}
+        onClick={handleCreateTask}
       >
         <SmallAddIcon />
       </Button>
