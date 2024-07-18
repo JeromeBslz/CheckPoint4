@@ -10,3 +10,15 @@ export interface ITask {
     completed: boolean;
 
 }
+
+export interface TaskProps {
+    individualTask: ITask;
+    handleCompleteTask: (id: string) => void;
+    handleDeleteTask: (id: string) => void;
+}
+
+export interface IDeleteTaskRequestParams {
+    params: {
+        id: string
+    }
+}

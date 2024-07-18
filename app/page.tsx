@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import AddTask from "@/components/AddTask";
 import NoTask from "@/components/NoTask";
 import Task from "@/components/Task";
+import Loading from "@components/Loading";
 
 import { ITask } from "@types";
 
@@ -60,8 +61,23 @@ export default function Home() {
 
   }
 
-  const handleDeleteTask = async () => {
+  const handleDeleteTask = async (id: string) => {
+    try {
+      const response = await fetch(`/api/task/delete/${id}`, {
+        method: "DELETE",
+      })
+      if (response.ok) {
+        setAllTasks((prevTasks) => prevTasks.filter((task: ITask) => task._id !== id))
+      }
+      else {
+        console.log('error')
+      }
+      
 
+    }
+    catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
@@ -73,7 +89,7 @@ export default function Home() {
       <Header />
       <AddTask task={task} setTask={setTask} handleCreateTask={handleCreateTask} />
       {isLoading ? (
-        <Spinner />
+        <Loading />
       ) : (
         <Flex direction="column" p="2rem">
           {allTasks.length > 0 ? (
