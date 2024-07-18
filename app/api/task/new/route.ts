@@ -1,6 +1,6 @@
-import Task from '@models/tasks';
-import { connectToDB } from '@utils/database';
-import { NextResponse } from 'next/server';
+import Task from "@models/tasks";
+import { connectToDB } from "@utils/database";
+import { NextResponse } from "next/server";
 
 export const POST = async (request: Request) => {
   const { task } = await request.json();
