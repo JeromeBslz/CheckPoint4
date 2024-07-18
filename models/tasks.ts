@@ -13,6 +13,6 @@ const taskSchema = new Schema<ITask>({
     }
 })
 
-const Task = models.task || model<ITask>('task', taskSchema)
+const Task = models.Task || model<ITask>('Task', taskSchema)
 
 export default Task;
