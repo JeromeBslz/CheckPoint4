@@ -55,30 +55,37 @@ export default function Home() {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
-  const handleCompleteTask = async () => {
-
-  }
+  const handleCompleteTask = async (id: string) => {
+    try {
+      const response = await fetch(`/api/task/complete/${id}`, {
+        method: "PATCH",
+      });
+      if (response.ok) {
+        await fetchTasks();
+      } else {
+        console.log('Error completing task');
+      }
+    } catch (error) {
+      console.log("Error completing task", error);
+    }
+  };
 
   const handleDeleteTask = async (id: string) => {
     try {
       const response = await fetch(`/api/task/delete/${id}`, {
         method: "DELETE",
-      })
+      });
       if (response.ok) {
-        setAllTasks((prevTasks) => prevTasks.filter((task: ITask) => task._id !== id))
+        setAllTasks((prevTasks) => prevTasks.filter((task: ITask) => task._id !== id));
+      } else {
+        console.log('Error deleting task');
       }
-      else {
-        console.log('error')
-      }
-      
-
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
     fetchTasks();
@@ -94,7 +101,12 @@ export default function Home() {
         <Flex direction="column" p="2rem">
           {allTasks.length > 0 ? (
             allTasks.map((individualTask: ITask) => (
-              <Task key={individualTask._id} individualTask={individualTask} handleCompleteTask={handleCompleteTask} handleDeleteTask={handleDeleteTask} />
+              <Task
+                key={individualTask._id}
+                individualTask={individualTask}
+                handleCompleteTask={handleCompleteTask}
+                handleDeleteTask={handleDeleteTask}
+              />
             ))
           ) : (
             <NoTask />
